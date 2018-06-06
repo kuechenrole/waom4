@@ -196,7 +196,7 @@ ad_VolCons(north) ==  F                            ! northern boundary
 
 ! Time-Stepping parameters.
 
-      NTIMES == 1681920
+      NTIMES == 1655640
           DT == 100.0d0 
      NDTFAST == 30
 
@@ -219,7 +219,7 @@ ad_VolCons(north) ==  F                            ! northern boundary
 
        NRREC == 0
    LcycleRST == T
-        NRST == 105120
+        NRST == 78840!every 3 month
         NSTA == 1
         NFLT == 1
        NINFO == 1
@@ -228,7 +228,7 @@ ad_VolCons(north) ==  F                            ! northern boundary
 
      LDEFOUT == T
         NHIS == 157680!6 month
-     NDEFHIS == 315360!1year
+     NDEFHIS == 0!315360!1year
       NTSAVG == 0!
         NAVG == 26280!1 month
      NDEFAVG == 315360! 1 year
@@ -774,7 +774,7 @@ Dout(iTvdif) == T T     ! temp_vdiff, ...    vertical diffusion
 ! Input NetCDF file names, [1:Ngrids].
 
      GRDNAME == /g/data2/gh9/oxr581/hr_exp/waom4_grd.nc
-     ININAME == /g/data2/gh9/oxr581/hr_exp/waom4_ini.nc
+     ININAME == /g/data2/gh9/oxr581/hr_exp/waom4_nt_ini.nc
      ITLNAME == ocean_itl.nc
      IRPNAME == ocean_irp.nc
      IADNAME == ocean_iad.nc

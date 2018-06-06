@@ -1,12 +1,12 @@
 #!/bin/bash
-#PBS -P gi0
+#PBS -P m68
 #PBS -q normal
 #PBS -l mem=3072gb,walltime=05:00:00,ncpus=2304
 #PBS -l wd
 #PBS -m a
-#PBS -N hre4_long
+#PBS -N hre4_nt_long
 
-cd /short/m68/oxr581/hre4/
+cd /short/m68/oxr581/hre4_nt/
 
 logname=$(date +%Y%m%d%H%M%S)
 
@@ -37,8 +37,8 @@ if [ $error -eq "0" ]; then
   echo "resubmitting next job"
   # resubmit job
   if [ $run_number -lt "16" ]; then
-    run_number_old=$[5*365*24*3600/100 + $run_number * 105120] # 5 years + 4 month
-    run_number_new=$[$run_number_old + 105120]    # 4 month more
+    run_number_old=$[5*365*24*3600/100 + $run_number * 78840] # 5 years + 3 month
+    run_number_new=$[$run_number_old + 78840]    # 3 month more
     sed -i 's/NTIMES == '$run_number_old'/NTIMES == '$run_number_new'/' ROMS/External/ocean_waom4.in
     run_number=$[$run_number + 1]
     echo $run_number > qsub.number
