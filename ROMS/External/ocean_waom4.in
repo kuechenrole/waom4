@@ -68,7 +68,7 @@
 
 ! C-preprocessing Flag.
 
-    MyAppCPP = WAOM10
+    MyAppCPP = waom4
 
 ! Input variable information file name.  This file needs to be processed
 ! first so all information arrays can be initialized properly.
@@ -196,9 +196,9 @@ ad_VolCons(north) ==  F                            ! northern boundary
 
 ! Time-Stepping parameters.
 
-      NTIMES == 1655640
-          DT == 100.0d0 
-     NDTFAST == 30
+      NTIMES == 788400
+          DT == 360.0d0 
+     NDTFAST == 36
 
 ! Model iteration loops parameters.
 
@@ -219,7 +219,7 @@ ad_VolCons(north) ==  F                            ! northern boundary
 
        NRREC == 0
    LcycleRST == T
-        NRST == 78840!every 3 month
+        NRST == 21900!every 3 month
         NSTA == 1
         NFLT == 1
        NINFO == 1
@@ -227,11 +227,11 @@ ad_VolCons(north) ==  F                            ! northern boundary
 ! Output history, average, diagnostic files parameters.
 
      LDEFOUT == T
-        NHIS == 157680!6 month
-     NDEFHIS == 0!315360!1year
+        NHIS == 43800!6 month
+     NDEFHIS == 87600!1year
       NTSAVG == 0!
-        NAVG == 26280!1 month
-     NDEFAVG == 315360! 1 year
+        NAVG == 7300!1 month
+     NDEFAVG == 87600! 1 year
       NTSDIA == 0
         NDIA == 0  
      NDEFDIA == 0
@@ -358,10 +358,9 @@ LtracerSponge == F F                            ! temperature, salinity, inert
 
 ! Vertical S-coordinates parameters (see below for details), [1:Ngrids].
 
-     THETA_S == 7.0d0                      ! surface stretching parameter  !kait: 7.0
-     THETA_B == 2.0d0                      ! bottom  stretching parameter  !kait: 2.0
-      TCLINE == 250.0d0                    ! critical depth (m)            !kait: 250.0
-                                           ! your parameters might belong to Vstretching 2 instead of 4 ... might be worse updating to kaits
+     THETA_S == 7.0d0                      ! surface stretching parameter  
+     THETA_B == 8.0d0                      ! bottom  stretching parameter
+      TCLINE == 250.0d0                    ! critical depth (m)
 
 ! Mean Density and Brunt-Vaisala frequency.
 
@@ -379,7 +378,7 @@ LtracerSponge == F F                            ! temperature, salinity, inert
 ! Nudging/relaxation time scales, inverse scales will be computed
 ! internally, [1:Ngrids].
 
-       TNUDG == 3.0d0                      ! days
+       TNUDG == 365.0d0                    ! days, 365 days on outflow, surface salt relax timescale is set in set_vbc.f90 to 1 month
        ZNUDG == 3.0d0                      ! days
       M2NUDG == 3.0d0                      ! days
       M3NUDG == 3.0d0                      ! days
@@ -388,7 +387,7 @@ LtracerSponge == F F                            ! temperature, salinity, inert
 ! conditions, [1:Ngrids]. If OBCFAC > 1, nudging on inflow is stronger
 ! than on outflow (recommended).
 
-      OBCFAC == 3.0d0                      ! nondimensional
+      OBCFAC == 356.0d0                      ! nondimensional
 
 ! Linear equation of State parameters:
 
@@ -773,8 +772,8 @@ Dout(iTvdif) == T T     ! temp_vdiff, ...    vertical diffusion
 
 ! Input NetCDF file names, [1:Ngrids].
 
-     GRDNAME == /g/data2/gh9/oxr581/hr_exp/waom4_grd.nc
-     ININAME == /g/data2/gh9/oxr581/hr_exp/waom4_nt_ini.nc
+     GRDNAME == /g/data2/gh9/oxr581/waom_frc/waom4_grd.nc
+     ININAME == /g/data2/gh9/oxr581/waom_frc/waom4_ini_premixed.nc
      ITLNAME == ocean_itl.nc
      IRPNAME == ocean_irp.nc
      IADNAME == ocean_iad.nc
@@ -793,7 +792,7 @@ Dout(iTvdif) == T T     ! temp_vdiff, ...    vertical diffusion
 ! line per entry with a vertical bar (|) symbol after each entry,
 ! except the last one.
 
-     BRYNAME == /g/data2/gh9/oxr581/hr_exp/waom4_bry.nc
+     BRYNAME == /g/data2/gh9/oxr581/waom_frc/waom4_bry.nc
      CLMNAME == ocean_clm.nc
 
 ! Input climatology nudging coefficients file name.
@@ -818,14 +817,12 @@ Dout(iTvdif) == T T     ! temp_vdiff, ...    vertical diffusion
 
      NFFILES == 6                          ! number of unique forcing files
 
-     FRCNAME == /g/data2/gh9/oxr581/hr_exp/waom4_tds.nc \
-                /g/data2/gh9/oxr581/hr_exp/waom4_shflux.nc \
-                /g/data2/gh9/oxr581/hr_exp/waom4_swflux.nc \
-                /g/data2/gh9/oxr581/hr_exp/waom4_sustr.nc \
-                /g/data2/gh9/oxr581/hr_exp/waom4_svstr.nc \
-                /g/data2/gh9/oxr581/hr_exp/waom4_nudge.nc         ! two forcing files for surface and tidal forcing and one sst relax file
-                
-
+     FRCNAME == /g/data2/gh9/oxr581/waom_frc/waom4_tds.nc \
+                /g/data2/gh9/oxr581/waom_frc/waom4_shflux.nc \
+                /g/data2/gh9/oxr581/waom_frc/waom4_swflux.nc \
+                /g/data2/gh9/oxr581/waom_frc/waom4_sustr.nc \
+                /g/data2/gh9/oxr581/waom_frc/waom4_svstr.nc \
+                /g/data2/gh9/oxr581/waom_frc/waom4_nudge.nc
 
 ! Output NetCDF file names, [1:Ngrids].
 
