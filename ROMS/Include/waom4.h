@@ -98,7 +98,7 @@
 #define ADD_FSOBC
 #define UV_TIDES
 #define ADD_M2OBC
-#define RAMP_TIDES
+#undef RAMP_TIDES
 /*
 #define FSOBC_REDUCED
 #define POT_TIDES
